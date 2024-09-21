@@ -1,0 +1,148 @@
+@font-face {
+  font-family: 'Equestria';
+  src: url("https://www.dropbox.com/s/x04iih58ob04d56/Equestria.otf?raw=1");
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+
+.receipt {
+  padding: 3mm;
+  width: 300px;
+  border: 1px solid black;
+  justify-content: center;
+  font-size: 12px;
+  margin-top: 30px;
+
+}
+
+.headerTitle {
+  font-family: 'Equestria', 'Permanent Marker', cursive;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#location {
+  margin-top: 5pt;
+  text-align: center;
+  font-weight: bold;
+}
+
+#date {
+  margin: 5pt 0px;
+  text-align: center;
+  font-size: 8pt;
+}
+
+#barcode {
+  display: block;
+  margin: 0px auto;
+}
+
+#barcode:empty {
+  display: none;
+}
+
+.head img {
+  height: 100px;
+}
+
+.head {
+  text-align: center;
+}
+
+#location {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  margin-top: 30px;
+}
+
+#location label {
+  margin-right: 10px;
+}
+
+#location div {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  border: none;
+}
+
+tr {
+  border: none;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+#qrcode {
+  align-self: center;
+  flex: 0 0 100px
+}
+
+.totalRow>div,
+.total>div {
+  text-align: right;
+  align-items: baseline;
+  font-size: 8pt;
+}
+
+
+.footer {
+  overflow: hidden;
+  margin-top: 5mm;
+  border-radius: 7px;
+  width: 100%;
+  background: black;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.footer:empty {
+  display: none;
+}
+
+.eta {
+  padding: 1mm 0px;
+}
+
+.eta:empty {
+  display: none;
+}
+
+.eta:before {
+  content: "Estimated time order will be ready: ";
+  font-size: 8pt;
+  display: block;
+}
+
+.etaLabel {
+  font-size: 8pt;
+}
+
+.printType {
+  padding: 1mm 0px;
+  width: 100%;
+  background: grey;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}

@@ -1,0 +1,137 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.menu-toggle {
+    display: none;
+    color: white;
+}
+
+body {
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.menu-bar {
+    background: rgb(0, 100, 0);
+    text-align: center;
+}
+
+.menu-bar ul {
+    display: inline-flex;
+    list-style: none;
+    color: #fff;
+}
+
+.menu-bar ul li {
+    width: 140px;
+    text-align: center;
+    margin: 15px;
+    padding: 10px;
+}
+
+
+.menu-bar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.active,
+.menu-bar ul li :hover {
+    background: #2bab0d;
+    border-radius: 30px;
+}
+
+.menu-bar.fa {
+    margin-right: 8px;
+}
+
+.sub-menu-1 {
+    display: none;
+}
+
+.menu-bar ul li:hover .sub-menu-1 {
+    display: block;
+    position: absolute;
+    background: rgb(0, 100, 0);
+    margin-top: 15px;
+    margin-left: -15px
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul {
+    display: block;
+    margin: 10px;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li {
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px dotted #fff;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li:last-child {
+    border-bottom: none;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li a:hover {
+    color: #b2ff00;
+}
+
+.fa-angle-right {
+    float: right;
+}
+
+.sub-menu-2 {
+    display: none;
+}
+
+.hover-me:hover .sub-menu-2 {
+    position: absolute;
+    display: block;
+    margin-top: -40px;
+    margin-left: 140px;
+    background: rgb(0, 100, 0);
+}
+
+/* css for images and class container */
+
+/* page responsive */
+/* CSS for the dropdown menu */
+
+
+@media screen and (max-width: 768px) {
+    .top{
+        display: none;
+        background-color: #88e75b;
+    }
+
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+    }
+
+    .menu-toggle.active + .top {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .wrap-login100 {
+        width: 50%;
+        padding: 77px 15px 33px 15px;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .alert-validate::before {
+        visibility: visible;
+        opacity: 1;
+    }
+  }

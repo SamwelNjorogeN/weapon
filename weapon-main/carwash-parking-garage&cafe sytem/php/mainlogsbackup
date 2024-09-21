@@ -1,0 +1,67 @@
+<?php
+session_start();
+
+date_default_timezone_set('Africa/Nairobi');
+
+include '../php/connect.php';
+
+//fetching of email and password credentials from the database
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $pass = $_POST['pass'];
+
+    $sql = "SELECT nationalID, email, pass FROM enroll WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Error in SQL query: " . $conn->error);
+    }
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        $user = $result->fetch_assoc();
+
+        // Verify password
+        if (password_verify($pass, $user['pass'])) {
+            // Password is correct
+
+            // Save login attempt to logs table
+            $nationalID = $user['nationalID'];
+            $login_time = date('Y-m-d H:i:s');
+            $login_date = date('Y-m-d');
+
+            $insert_sql = "INSERT INTO logs (nationalID, email, login_time, login_date) VALUES (?, ?, ?, ?)";
+            $insert_stmt = $conn->prepare($insert_sql);
+            if (!$insert_stmt) {
+                die("Error in SQL query: " . $conn->error);
+            }
+            $insert_stmt->bind_param("ssss", $nationalID, $email, $login_time, $login_date);
+            $insert_stmt->execute();
+            $insert_stmt->close();
+
+            // Store user session data
+            $_SESSION['email'] = $email;
+            $_SESSION['nationalID'] = $nationalID;
+            $_SESSION['time'] = $login_time;
+            $_SESSION['date'] = $login_date;
+
+            // Redirect to the user's dashboard or a protected page
+            header("Location: ../html/book.php");
+            exit();
+        } else {
+            // Error to display when the password is incorrect
+            echo "<div id='overlay' style='position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 999; display: flex; justify-content: center; align-items: center;'>
+                    <div style='background-color: white; padding: 20px; border-radius: 10px; text-align: center;'>
+                        <h2 style='color: red;'>Incorrect email or password</h2>
+                        <button class='login100-form-bgbtn' style='color: red; width: 100px; height: 30px; font-weight: bolder; border-radius: 30px; border: none; cursor: pointer; background: #a64bf4; background: -webkit-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff); background: -o-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff); background: -moz-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff); background: linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);'onclick=\"window.location.href = '../html/login.php';\">OK</button>
+                    </div>
+                </div>";
+        }
+    } 
+    
+    
+}
+
+$conn->close();
